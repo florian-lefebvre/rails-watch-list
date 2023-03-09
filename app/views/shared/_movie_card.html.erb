@@ -1,0 +1,21 @@
+<% add ||= false %>
+<% delete ||= false %>
+<div class="col-12 col-sm-6 mb-4">
+  <div class="bg-white rounded shadow h-100">
+    <%= image_tag movie.poster_url, alt: movie.title, class: "movie-img rounded-top" %>
+    <div class="p-3 rounded-bottom d-flex flex-column">
+      <strong><%= movie.title %> <span class="text-muted font-weight-normal">• <%= movie.rating %> <i class="fas fa-star star-yellow"></i></span></strong>
+      <small class="text-muted"><%= movie.overview %></small>
+    </div>
+    <% if add %>
+    <form method="post" action="<%= list_bookmarks_path%>" data-turbo="false" class="p-3 pt-0">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= hidden_field_tag "bookmark[movie_id]".to_s, movie.id %>
+      <%= hidden_field_tag "bookmark[comment]".to_s, "really cool" %>
+      <button type="submit" class="btn btn-success">Add</button>
+    </form>
+    <% elsif delete %>
+      <%= link_to "Delete", bookmark_path(Bookmark.find_by(list: @list, movie:)), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger m-3 mt-0" %>
+    <% end %>
+  </div>
+</div>

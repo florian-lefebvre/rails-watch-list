@@ -1,3 +1,21 @@
-<h1><%= @list.name %></h1>
-
-<%= link_to "Back to all", lists_path %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+  <div class="container py-5 text-white">
+    <h1><%= @list.name %>
+    </h1>
+  </div>
+</div>
+<div class="mt-5 container">
+  <div class="d-flex justify-content-between align-items-center mb-5">
+    <%= link_to "Back to all", lists_path, class: "btn btn-secondary" %>
+    <%= link_to "Add movie", new_list_bookmark_path(@list), class: "btn btn-success" %>
+  </div>
+  <% if @list.movies.empty? %>
+    <p>No movies</p>
+  <% else %>
+    <div class="row">
+      <% @list.movies.each do |movie| %>
+        <%= render "shared/movie_card", movie:, delete: true %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

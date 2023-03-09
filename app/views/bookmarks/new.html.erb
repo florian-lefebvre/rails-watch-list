@@ -1,0 +1,19 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+  <div class="container py-5 text-white">
+    <h1>Add movie</h1>
+  </div>
+</div>
+<div class="mt-5 container">
+  <%= link_to "Back to list", list_path(@list), class: "btn btn-secondary mb-5" %>
+</div>
+<div class="container">
+  <% if @movies.empty? %>
+    <p>No movies</p>
+  <% else %>
+    <div class="row">
+      <% @movies.each do |movie| %>
+        <%= render "shared/movie_card", movie:, add: true %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
